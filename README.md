@@ -5,10 +5,10 @@
 ### Foundation
 type_traits (just gonna use std for this lol) \
 utility \
-memory \
+memory
 
 ### Iterators
-iterator \
+iterator
 
 ### Containers
 array \
@@ -16,10 +16,10 @@ vector \
 string \
 linked list \
 map \
-unordered_map \
+unordered_map
 
 ### Algorithms
 find \
 sort \
-copy \
+copy
 
