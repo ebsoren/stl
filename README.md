@@ -1,25 +1,25 @@
 # Personal STL implementation #6382902
 
-## Roadmap:
+## Roadmap
 
 ### Foundation
-type_traits (just gonna use std for this lol)
-utility
-memory
+type_traits (just gonna use std for this lol) \
+utility \
+memory \
 
 ### Iterators
-iterator
+iterator \
 
 ### Containers
-array
-vector
-string
-linked list
-map
-unordered_map
+array \
+vector \
+string \
+linked list \
+map \
+unordered_map \
 
 ### Algorithms
-find
-sort
-copy
+find \
+sort \
+copy \
 
