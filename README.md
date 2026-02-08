@@ -1,5 +1,7 @@
 # Personal STL implementation #6382902
 
+Probably not going to implement any methods involving error checking.
+
 ## Roadmap
 
 ### Foundation
@@ -21,5 +23,8 @@ unordered_map
 ### Algorithms
 find \
 sort \
-copy
+copy \
+equal \
+
+### Allocator(s) ?
 

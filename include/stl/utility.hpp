@@ -1,6 +1,8 @@
 #ifndef STL_UTILITY_HPP
 #define STL_UTILITY_HPP
 
+#include <initializer_list>
+
 #include "type_traits.hpp"
 
 
@@ -13,7 +15,7 @@ namespace stl {
     marking move as noexcept means that container operations which would like to be able to
     roll back to previous state on failure (for example, vector::resize()) can safely use move,
     instead of relying on slower operations. Also, compilers can avoid the (small) overhead in stack
-    unwinding  needed for operations that may throw an exception.
+    unwinding needed for operations that may throw an exception.
 
 */
 template <typename T>
@@ -65,6 +67,13 @@ void swap(T &a, T &b) noexcept {
     b = move(temp);
 }
 
+template <typename T>
+void copy_swap(T &a, T &b) noexcept {
+    T temp = a;
+    a = b;
+    b = a;
+}
+
 
 /*
 
@@ -88,6 +97,18 @@ struct pair {
         : first(forward<T2>(f))
         , second(forward<U2>(s)) {}
 };
+
+
+template <typename T>
+void max(T &&f, T &&s) {
+    return f > s ? f : s;
+}
+
+template <typename T>
+void min(T &&f, T &&s) {
+    return !max(f, s);
+}
+
 
 }   // namespace stl
 
