@@ -71,7 +71,7 @@ template <typename T>
 void copy_swap(T &a, T &b) noexcept {
     T temp = a;
     a = b;
-    b = a;
+    b = temp;
 }
 
 
