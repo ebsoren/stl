@@ -129,6 +129,8 @@ void c_erase(T *start, T *end, size_t n) {
     destroy(end - n, end);
 }
 
+template <typename T>
+void init(T* &data_, size_t cap_) { data_ = static_cast<T *>(malloc(cap_ * sizeof(T))); }
 
 }   // namespace stl
 

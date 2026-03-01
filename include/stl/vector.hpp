@@ -28,13 +28,13 @@ public:
     vector(size_t cap)
         : cap_(cap) {
         size_ = 0;
-        init_data_();
+        init(data_, cap_);
     }
 
     // Construct with capacity and fill value
     vector(size_t cap, T &&value)
         : cap_(cap) {
-        init_data_();
+        init(data_, cap_);
         size_ = cap;
         if constexpr (stl::is_trivially_constructible<T>::value) {
             memplace(data_, data_ + cap_, value);
@@ -45,7 +45,7 @@ public:
 
     vector(size_t cap, const T &value)
         : cap_(cap) {
-        init_data_();
+        init(data_, cap_);
         size_ = cap;
         if constexpr (stl::is_trivially_constructible<T>::value) {
             memplace(data_, data_ + cap_, value);
@@ -58,9 +58,8 @@ public:
     vector(const vector<T> &other)
         : cap_(other.cap_)
         , size_(other.size_) {
-        init_data_();
+        init(data_, cap_);
         construct(data_, other.data_, size_);
-        
     }
 
     // Move constructor
@@ -75,7 +74,7 @@ public:
     vector(std::initializer_list<T> init_list) {
         cap_ = init_list.size();
         size_ = 0;
-        init_data_();
+        init(data_, cap_);
 
         for (const auto &v : init_list) {
             new (data_ + size_++) T(v);
@@ -94,9 +93,9 @@ public:
         size_ = other.size_;
         cap_ = other.cap_;
 
-        init_data_();
+        init(data_, cap_);
         construct(data_, other.data_, size_);
-        
+
         return *this;
     }
 
@@ -272,8 +271,6 @@ private:
         }
         data_ = dest;
     }
-
-    void init_data_() { data_ = static_cast<T *>(malloc(cap_ * sizeof(T))); }
 };
 
 
