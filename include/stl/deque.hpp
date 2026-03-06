@@ -12,8 +12,6 @@
 #include "type_traits.hpp"
 #include "utility.hpp"
 
-static constexpr unsigned int BUFFER_SIZE = 512;
-
 // Enum class to specify how to construct a node. A single node should be MID constructed,
 // while a node added to the front of the list (or back) should also be specified.
 enum class NodeType {
@@ -28,7 +26,7 @@ namespace stl {
 // of buffers. On an insert, either add to the last buffer or, if full, allocate a new one.
 // On a delete, either delete from the first buffer, or if only one element remains,
 // delete the buffer entirely.
-template <typename T>
+template <typename T, size_t BUFFER_SIZE = 512>
 class deque {
     // Node in deque's linked list
     struct node {
@@ -248,6 +246,7 @@ public:
             front_->prev_ = nullptr;
             delete old;
         }
+        size_--;
     }
 
     // Pop from the back of the deque
@@ -259,6 +258,11 @@ public:
             back_->next_ = nullptr;
             delete old;
         }
+        size_--;
+    }
+
+    bool empty() {
+        return !size_;
     }
 };
 

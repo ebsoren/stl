@@ -100,7 +100,7 @@ struct pair {
 
 
 template <typename T>
-void max(T &&f, T &&s) {
+T max(T &&f, T &&s) {
     return f > s ? f : s;
 }
 
