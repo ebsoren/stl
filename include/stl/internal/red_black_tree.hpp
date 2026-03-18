@@ -4,23 +4,6 @@
 #include "../vector.hpp"
 #include <algorithm>
 
-/*
-
-                1
-            2       3
-        4     5  6     7
-1 23 4567 8 9 10 11 12 13 14 15
-
-1
-
-2
-
-4
-
-8
-
-*/
-
 
 namespace stl {
 
@@ -43,6 +26,10 @@ class red_black_tree {
     // Remove node from tree
     void remove_(unsigned int loc) {
         // TODO
+        
+        if ()
+        
+        in_use_[loc] = false;
     }
 
 public:
@@ -62,7 +49,6 @@ public:
         unsigned int loc = find_(0, val);
         if (loc < nodes_.size() && in_use_[loc] && nodes_[loc] == val) {
             remove_(loc);
-            in_use_[loc] = false;
         }
     }
 

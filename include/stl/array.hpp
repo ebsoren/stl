@@ -12,7 +12,6 @@ namespace stl {
 
 template <typename T, std::size_t N>
 struct array {
-
     // Provide const and non-const methods to allow use on any array
     // first const indicates result cannot be modified; second const means the
     // function may be called on a const data type.
@@ -39,10 +38,8 @@ struct array {
 
     const T &operator[](size_t i) const { return &(data_ + i); }
 
-    private: 
-
+private:
     T data_[N];
-    
 };
 
 
