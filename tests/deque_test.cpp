@@ -103,6 +103,29 @@ void test_front_across_nodes() {
     std::cout << "  front_across_nodes: PASSED\n";
 }
 
+void test_reuse_after_empty_at_buffer_boundary() {
+    stl::deque<int, 4> d;
+
+    d.push_back(1);
+    d.push_back(2);
+    d.pop_front();
+    d.pop_front();
+    assert(d.empty());
+    d.push_back(3);
+    assert(d.front() == 3);
+    d.pop_front();
+
+    d.push_front(2);
+    d.push_front(1);
+    d.pop_back();
+    d.pop_back();
+    assert(d.empty());
+    d.push_front(4);
+    assert(d.front() == 4);
+
+    std::cout << "  reuse_after_empty_at_buffer_boundary: PASSED\n";
+}
+
 // --- push_back tests ---
 
 void test_push_back_lvalue() {
@@ -251,6 +274,7 @@ int main() {
     test_empty();
     test_front();
     test_front_across_nodes();
+    test_reuse_after_empty_at_buffer_boundary();
 
     std::cout << "\npush_back tests:\n";
     test_push_back_lvalue();

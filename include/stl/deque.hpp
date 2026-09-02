@@ -248,7 +248,11 @@ public:
             front_->prev_ = nullptr;
             delete old;
         }
-        size_--;
+        if (--size_ == 0) {
+            delete front_;
+            front_ = nullptr;
+            back_ = nullptr;
+        }
     }
 
     // Pop from the back of the deque
@@ -260,7 +264,11 @@ public:
             back_->next_ = nullptr;
             delete old;
         }
-        size_--;
+        if (--size_ == 0) {
+            delete back_;
+            front_ = nullptr;
+            back_ = nullptr;
+        }
     }
 
     bool empty() {

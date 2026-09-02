@@ -40,6 +40,24 @@ void test_reuse_after_empty() {
     std::cout << "  reuse_after_empty: PASSED\n";
 }
 
+void test_reuse_after_empty_at_buffer_boundary() {
+    stl::threadsafe_deque<int> d;
+
+    // A default deque starts in the middle of its 512-element buffer.
+    for (int i = 0; i < 256; i++) {
+        d.push_back(i);
+    }
+    for (int i = 0; i < 256; i++) {
+        assert(d.try_pop_front() == i);
+    }
+
+    d.push_back(42);
+    assert(d.try_pop_front() == 42);
+    assert(!d.try_pop_front().has_value());
+
+    std::cout << "  reuse_after_empty_at_buffer_boundary: PASSED\n";
+}
+
 void test_crosses_buffer_boundaries() {
     stl::threadsafe_deque<int> d;
     constexpr int count = 1200;
@@ -73,6 +91,7 @@ int main() {
     test_empty_pop();
     test_fifo_order();
     test_reuse_after_empty();
+    test_reuse_after_empty_at_buffer_boundary();
     test_crosses_buffer_boundaries();
     test_with_strings();
 
