@@ -1,6 +1,6 @@
 # Compiler settings
 CXX := clang++
-CXXFLAGS := -std=c++20 -Wall -Wextra -Wpedantic -g
+CXXFLAGS := -std=c++20 -Wall -Wextra -Wpedantic -g -pthread
 INCLUDES := -I include
 
 # Directories

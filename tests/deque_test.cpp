@@ -52,6 +52,57 @@ void test_range_construction_large() {
     std::cout << "  range_construction_large: PASSED\n";
 }
 
+// --- Status and element access tests ---
+
+void test_empty() {
+    stl::deque<int> d;
+    assert(d.empty());
+
+    d.push_back(1);
+    assert(!d.empty());
+    d.pop_back();
+    assert(d.empty());
+
+    d.push_front(2);
+    assert(!d.empty());
+    d.pop_front();
+    assert(d.empty());
+
+    std::cout << "  empty: PASSED\n";
+}
+
+void test_front() {
+    stl::deque<int> d;
+    d.push_back(2);
+    d.push_back(3);
+    assert(d.front() == 2);
+
+    d.push_front(1);
+    assert(d.front() == 1);
+
+    d.front() = 10;
+    assert(d.front() == 10);
+    d.pop_front();
+    assert(d.front() == 2);
+
+    std::cout << "  front: PASSED\n";
+}
+
+void test_front_across_nodes() {
+    stl::deque<int, 4> d;
+    for (int i = 0; i < 10; i++) {
+        d.push_back(i);
+    }
+
+    for (int i = 0; i < 10; i++) {
+        assert(d.front() == i);
+        d.pop_front();
+    }
+    assert(d.empty());
+
+    std::cout << "  front_across_nodes: PASSED\n";
+}
+
 // --- push_back tests ---
 
 void test_push_back_lvalue() {
@@ -195,6 +246,11 @@ int main() {
     test_default_construction();
     test_range_construction();
     test_range_construction_large();
+
+    std::cout << "\nStatus and access tests:\n";
+    test_empty();
+    test_front();
+    test_front_across_nodes();
 
     std::cout << "\npush_back tests:\n";
     test_push_back_lvalue();

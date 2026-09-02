@@ -199,6 +199,7 @@ public:
             add_front();
         }
         front_->push_frontbuf(val);
+        size_++;
     }
 
     void push_front(T &&val) {
@@ -210,6 +211,7 @@ public:
             add_front();
         }
         front_->push_frontbuf(stl::move(val));
+        size_++;
     }
 
     // Push to the back of the deque
@@ -263,6 +265,11 @@ public:
 
     bool empty() {
         return !size_;
+    }
+
+    // Return a reference to the front of the queue
+    T &front() {
+        return *(front_->data_ + front_->buf_front_);
     }
 };
 
